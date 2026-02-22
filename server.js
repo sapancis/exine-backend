@@ -6,8 +6,16 @@ const Anthropic = require("@anthropic-ai/sdk");
 const app = express();
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
+
 app.use(express.json());
+
 
 const getSystemPrompt = (gender) => {
   const genderNote =
